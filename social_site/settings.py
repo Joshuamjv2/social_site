@@ -25,7 +25,7 @@ SECRET_KEY = 'cjs3+6$(tf9wu-f$(c3e#%hqv9p*@8ij*c10n=-)uk3ly01-h4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
 # Login
 LOGIN_REDIRECT_URL = 'dashboard'
@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -104,6 +106,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '275206537916-vfja2hg7lvm8sfrrjdg584rlkaqe66d6.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'eDeaTz_d8kLCbp9Sw-s7b4C3'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '301571291354885'
+SOCIAL_AUTH_FACEBOOK_SECRET = '743556ab7428392d77a7eb833a15839f'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -123,8 +140,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
