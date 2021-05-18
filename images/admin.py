@@ -1,10 +1,8 @@
 from django.contrib import admin
-
 from .models import Image
 @admin.register(Image)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'title', 'image','created']
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ['title', 'slug', 'image', 'created']
+    list_filter = ['created']
 
 # Register your models here.
-
-
