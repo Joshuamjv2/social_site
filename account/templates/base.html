@@ -13,7 +13,7 @@
 </head>
 <body>
     <div id="header">
-        
+
 
         <span class="logo">Bookmarks</span>
         {% if request.user.is_authenticated %}
@@ -30,7 +30,7 @@
             </ul>
         {% endif %}
 
-        
+
         <span class="user">
             {% if request.user.is_authenticated %}
                 Hello {{request.user.first_name}}
@@ -39,7 +39,6 @@
             {% else %}
                 <a href="{% url 'login'%}">Log-in</a>
             {% endif %}
-                
         </span>
     </div>
     {% if messages %}
@@ -57,5 +56,25 @@
 
         {% endblock content %}
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdeliver.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+    <script>
+        var csrftoken = Cookies.get('csrftoken')
+        function csrfSafeMethod(method){
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method))
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings){
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain){
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        })
+        $(document).ready(function(){
+            {% block domready %}
+            {% endblock %}
+        });
+    </script>
 </body>
 </html>
