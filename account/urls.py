@@ -8,6 +8,8 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('edit', views.edit, name='edit'),
     path('login', auth_views.LoginView.as_view(redirect_authenticated_user=True), name='login'),
+    path('users/', views.user_list, name='user_list'),
+    path('users/<username>/', views.user_detail, name='user_detail')
     # path('logout', auth_views.LogoutView.as_view(), name='logout'),
 
     # path('password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
